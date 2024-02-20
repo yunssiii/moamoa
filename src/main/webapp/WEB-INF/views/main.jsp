@@ -20,7 +20,7 @@
 <body>
 
     <nav class="navigator">
-        <div class="nav-logo">Log Picture</div>
+        <div class="nav-logo">Moa Picture</div>
         <div class="search-box">
             <span class="material-symbols-outlined">
                 search
