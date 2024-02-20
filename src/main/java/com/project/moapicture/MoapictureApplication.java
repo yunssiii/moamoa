@@ -1,4 +1,4 @@
-package com.project.logpicture;
+package com.project.moapicture;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -12,10 +12,10 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-public class LogpictureApplication {
+public class MoapictureApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LogpictureApplication.class, args);
+		SpringApplication.run(MoapictureApplication.class, args);
 	}
 
 	// dataSource와 mapper 파일들을 포함하고 있는 SqlSessionFactory 객체를 반환하는 메소드

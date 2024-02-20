@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.project.logpicture.mapper.TemplateMapper">
+<mapper namespace="com.project.moapicture.mapper.TemplateMapper">
 <!-- TemplateMapper 지우고 자기 매퍼이름을 기입해주세요 -->
 
 <!--    id에는 MapperInterface의 메소드 이름을 기입합니다.-->
@@ -13,7 +13,7 @@
         select count(*) from Table
     </select>
 
-    <insert id="insertMethod" parameterType="com.project.logpicture.dto.TemplateDTO">
+    <insert id="insertMethod" parameterType="com.project.moapicture.dto.TemplateDTO">
 --         insert SQL문 작성
         insert into TempTable (column1, column2, column3) values (#{column1}, #{column2}, #{column3})
     </insert>

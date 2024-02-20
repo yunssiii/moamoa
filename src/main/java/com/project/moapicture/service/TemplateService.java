@@ -1,6 +1,6 @@
-package com.project.logpicture.service;
+package com.project.moapicture.service;
 
-import com.project.logpicture.dto.TemplateDTO;
+import com.project.moapicture.dto.TemplateDTO;
 
 public interface TemplateService {
 

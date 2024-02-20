@@ -1,4 +1,4 @@
-package com.project.logpicture.dto;
+package com.project.moapicture.dto;
 
 import lombok.Data;
 

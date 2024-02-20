@@ -1,7 +1,7 @@
-package com.project.logpicture.service;
+package com.project.moapicture.service;
 
-import com.project.logpicture.dto.TemplateDTO;
-import com.project.logpicture.mapper.TemplateMapper;
+import com.project.moapicture.dto.TemplateDTO;
+import com.project.moapicture.mapper.TemplateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

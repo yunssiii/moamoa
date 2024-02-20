@@ -1,6 +1,6 @@
-package com.project.logpicture.mapper;
+package com.project.moapicture.mapper;
 
-import com.project.logpicture.dto.TemplateDTO;
+import com.project.moapicture.dto.TemplateDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
