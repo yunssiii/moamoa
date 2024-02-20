@@ -1,0 +1,81 @@
+/* 로고 폰트 */
+@font-face {
+    font-family: 'PartialSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/PartialSansKR-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{font-family: NanumSquareBold; margin: 0px;background: linear-gradient(rgb(255, 243, 245) 30%, rgb(209, 170, 221));}
+
+/* signup.html */
+
+.signup-wrap{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 40px;
+}
+
+.signup-logo{
+    /* background-color: rgb(181, 181, 224); */
+    font-family: 'PartialSansKR-Regular';
+    font-size: 250%;
+    margin-bottom: 50px;
+}
+
+.signup-email{
+    padding: 14px;
+    width: 300px;
+    border-radius: 10px;
+    border: 2px solid lightgray;
+    font-family: NanumSquareBold;
+}
+
+.chk-email-btn{
+    padding: 14px;
+    border: none;
+    background-color: lightgray;
+    font-family: NanumSquareBold;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.chk-email-btn:hover{
+    cursor: pointer;
+}
+
+.signup-input{
+    padding: 14px;
+    width: 395px;
+    border-radius: 10px;
+    border: 2px solid lightgray;
+    font-family: NanumSquareBold;
+}
+
+.signup-btn{
+    padding: 14px;
+    width: 250px;
+    border-radius: 10px;
+    border: none;
+    background-color: lightgray;
+    font-family: NanumSquareBold;
+    font-size: 11pt;
+}
+
+.signup-btn:hover{
+    color: white;
+    background-color: rgb(226,97,97);
+    cursor: pointer;
+}
+

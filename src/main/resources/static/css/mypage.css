@@ -1,0 +1,331 @@
+body{margin: 0px;padding: 0px;background-color: rgb(255, 243, 245);}
+p{margin: 0;}
+
+.mypage-wrap{
+    /* border: 1px solid; */
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 50px;
+}
+
+.grid{
+    width: 100%;
+}
+
+.grid-sizer, .grid-item{
+    width: 18%;
+}
+
+.grid-item {
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom:15px;
+}
+
+.grid-item img {
+    display: block; 
+    min-width:100%; 
+    max-width: 100%; 
+}
+
+.hover-text {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
+    color: #fff;
+    opacity: 0;
+    border-radius: 10px;
+    padding: 20px 10px;
+
+    /* transition effect. not necessary */
+    transition: opacity .2s, visibility .2s;
+    height: 100%;
+}
+
+
+.grid-item:hover .hover-text {
+    visibility: visible;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.a-up-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.up-name{
+    margin: 10px 0px 5px 0px;
+    font-size: 17pt;
+    font-family: NanumSquareExtraBold;
+}
+
+.up-email{
+    font-size: 10pt;
+    color: gray;
+    margin-bottom: 15px;
+}
+
+.a-down-box{
+    margin: 20px 0px;
+    /* background-color: rgba(255, 255, 255, 0.5); */
+    border-radius: 13px;
+    padding: 20px;
+    /* min-height: 500px; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.my-btns{
+    background-color: rgb(179, 179, 179);
+    border: none;
+    padding: 15px 25px;
+    border-radius: 30px;
+    margin-left: 5px;
+    color: white;
+    font-family: NanumSquareExtraBold;
+    font-size: 12pt;
+    margin-bottom: 20px;
+}
+
+.my-btns:hover{
+    cursor: pointer;
+    background-color: rgb(117, 117, 117);
+}
+
+/* 카테고리 클릭 시 추가되는 클래스 */
+.click{
+    background-color: rgba(226,97,97);
+}
+
+/* ----------------------------------------- */
+/* 내 정보 css */
+.myInfo-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    height: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 13px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
+}
+
+.myInfoBtns-box span{
+    font-family: NanumSquare;
+}
+
+.update-btns{
+    background: none;
+    border: none;
+    font-family: NanumSquare;
+    margin-bottom: 40px;
+}
+
+/* 닉네임 css */
+.update-inputs-box{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.input-box1{
+    font-family: NanumSquareExtraBold;
+    width: 250px;
+    padding: 15px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
+
+.auth-btn{
+    background-color: lightgray;
+    font-family: NanumSquareBold;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.auth-btn:hover, .update-btns:hover{
+    cursor: pointer;
+}
+
+.update-btn{
+    margin-top: 30px;
+    background-color: lightgray;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    width: 150px;
+    font-family: NanumSquareBold;
+    font-size: 11pt;
+}
+
+.update-btn:hover{
+    cursor: pointer;
+    background-color: rgba(226,97,97);
+    color: white;
+}
+
+/* 비밀번호 css */
+.input-box2{
+    font-family: NanumSquareExtraBold;
+    width: 350px;
+    padding: 15px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    color: black;
+}
+
+/* 내 정보 닉네임 변경/비밀번호 변경 선택 클래스 */
+.myInfo-click{
+    font-family: NanumSquareExtraBold;
+}
+
+.hidden{
+    display: none;
+}
+
+/* ----------------------------------------- */
+/* 게시글 css */
+table {
+    border-top: 2px solid gray;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 10.5pt;
+}
+tr {
+    border-bottom: 1px solid #afafaf;
+}
+
+thead th{
+    padding: 15px 0px;
+}
+
+td {
+    padding: 10px;
+}
+
+.td-none{
+    text-align: center;
+    padding: 80px 0px;
+}
+
+td, .post-bottom {
+    font-family: NanumSquare;
+}
+
+.td-post {
+    display: flex;
+}
+
+.td-center{
+    text-align: center;
+}
+
+.post-bottom{
+    /* border: 1px solid red; */
+    font-size: 10.5pt;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px;
+    margin-left: 7px;
+    font-family: NanumSquareBold;
+}
+
+.post-bottom input {
+    margin-right: 5px;
+}
+
+.post-bottom-div {
+    display: flex;
+    align-items: center;
+}
+
+.post-bottom button {
+    background: rgb(232, 231, 231);
+    border: none;
+    padding: 9px 15px;
+    border-radius: 6px;
+    font-size: 10pt;
+    font-family: NanumSquare;
+}
+
+.post-bottom button:hover{
+    font-family: NanumSquareBold;
+}
+
+tfoot td{
+    text-align: center;
+}
+
+/* ----------------------------------------- */
+/* 댓글 css*/
+.comment-td{
+   display: flex;
+}
+
+.comment-href{
+    font-family: NanumSquare;    
+}
+
+.comment-href:hover{
+    text-decoration: underline;
+}
+
+.comment-date, .comment-title{
+    font-size: 9.7pt;
+    color: gray;
+    margin-top: 5px;
+}
+
+.comment-title span{
+    color: red;
+}
+
+/* ----------------------------------------- */
+/* 체크박스 css */
+/* 체크박스 */
+
+input[type="checkbox"]{
+    display:none;
+}
+  
+input[type="checkbox"] + label{
+    cursor:pointer;
+    margin-right: 10px;
+}
+
+input[type="checkbox"] + label::before{ /* 가상요소 */
+    content:"";
+    display:inline-block;
+    width:13px;
+    height:13px;
+    border:2px solid #cecece;
+    border-radius: 4px;
+    vertical-align:middle;
+}
+
+input[type="checkbox"]:checked + label::before{ /* 가상요소 체크 후 */
+    content:"";
+    background-color:#ffffff;
+    border-color:#cecece;
+    background-image: url('../images/chk.png');
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+

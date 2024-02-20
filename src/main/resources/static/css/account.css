@@ -1,0 +1,80 @@
+body{margin: 0px;padding: 0px;background-color: rgb(255, 243, 245);}
+p{margin: 0;}
+
+.account-wrap{
+    /* border: 1px solid; */
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 50px;
+}
+
+.grid{
+    display:grid;
+    /* height: 100vh; */
+    /* background:#FF0; */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: 20px;
+    grid-gap: 20px;
+    position: relative;
+}
+
+.grid-item{ /* .grid 내부에 들어갈 요소 클래스 값 */
+    width:100%;
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+}
+
+.grid-item > img{
+    width: 100%;
+    border-radius: 10px;
+    height: auto;
+}
+
+.hover-text {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    opacity: 0;
+    border-radius: 10px;
+    padding: 20px 10px;
+
+    /* transition effect. not necessary */
+    transition: opacity .2s, visibility .2s;
+    height: 100%;
+}
+
+
+.grid-item:hover .hover-text {
+    visibility: visible;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.a-up-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.up-name{
+    margin: 10px 0px 5px 0px;
+    font-size: 17pt;
+    font-family: NanumSquareExtraBold;
+}
+
+.up-email{
+    font-size: 10pt;
+    color: gray;
+    margin-bottom: 50px;
+}
+
+.a-down-box{
+    margin-top: 20px;
+
+}

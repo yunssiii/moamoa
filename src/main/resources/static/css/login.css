@@ -1,0 +1,93 @@
+/* 로고 폰트 */
+@font-face {
+    font-family: 'PartialSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/PartialSansKR-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{font-family: NanumSquareBold; margin: 0px;background: linear-gradient(rgb(255, 243, 245) 30%, rgb(209, 170, 221));}
+
+/* login.html */
+
+.login-wrap{
+    border: 1px solid black;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-logo{
+    /* background-color: rgb(181, 181, 224); */
+    font-family: 'PartialSansKR-Regular';
+    font-size: 250%;
+    margin-bottom: 50px;
+}
+
+.login-input,.login-input2,.login-input3{
+    /* background-color: antiquewhite; */
+    font-family: NanumSquareBold;
+    padding: 19px 135px 13px 10px;
+    border: 2px solid lightgray;
+    border-radius: 10px 10px 1px 1px;
+    /* margin-bottom: 20px; */
+}
+
+.login-input2{
+    border-radius: 1px 1px 10px 10px;
+    border-top: none;
+}
+
+.login-input3{
+    border-radius: 10px;
+}
+
+.login-btn-box{
+    display: flex;
+    justify-content: center;
+}
+
+.login-btn,.email-btn,.login-pwdAuth-btn,.pwdChange-btn{
+    background-color: rgba(226,97,97);
+    font-family: NanumSquareBold;
+    font-size: 12pt;
+    /* border: 2px solid lightgray; */
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 15px 126px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.login-other-wrap{
+    /* background-color: palevioletred; */
+}
+
+.login-other-a{
+    /* background-color: peru; */
+    font-size: 9pt;
+    color: gray;
+    text-decoration: none;
+}
+
+/* loginPwd.html */
+.email-btn{
+    padding: 15px 71px;
+}
+
+.login-pwdAuth-btn{
+    padding: 15px 134px;
+}
+
+.pwdChange-btn{
+    padding: 15px 104px;
+}
+
+.login-btn:hover, .email-btn:hover,.login-pwdAuth-btn:hover,.pwdChange-btn:hover{
+    cursor: pointer;
+}
+
+
