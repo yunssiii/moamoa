@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.moapicture.mapper.CreatedMapper">
+
+    <!-- post테이블 insert -->
+    <insert id="insertPost" parameterType="com.project.moapicture.dto.PostDTO">
+        insert into post (post_id,user_email,post_title,post_content,user_nickname)
+        values (#{post_id},#{user_email},#{post_title},#{post_content},#{user_nickname})
+    </insert>
+
+    <!-- image테이블 insert -->
+    <insert id="insertImage" parameterType="com.project.moapicture.dto.ImageDTO">
+        insert into image (image_id,image_savename,image_originalname,image_url,post_id)
+        values (#{image_id},#{image_savename},#{image_originalname},#{image_url},#{post_id})
+    </insert>
+
+    <!-- hashtag테이블 insert -->
+    <insert id="insertHashtag" parameterType="com.project.moapicture.dto.HashtagDTO">
+        insert into hashtag (tag_id,tag_name)
+        values (#{tag_id},#{tag_name})
+    </insert>
+
+    <!-- post_hashtag테이블 insert -->
+    <insert id="insertPostHashtag" parameterType="com.project.moapicture.dto.PostHashtagDTO">
+        insert into post_hashtag (post_id,tag_id)
+        values (#{post_id},#{tag_id})
+    </insert>
+
+    <!-- user_like테이블 insert -->
+    <insert id="insertUserLike" parameterType="com.project.moapicture.dto.LikeDTO">
+        insert into user_like (like_id,post_id,user_email)
+        values (#{like_id},#{post_id},#{user_email})
+    </insert>
+
+</mapper>

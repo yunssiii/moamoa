@@ -8,6 +8,7 @@
 
 <!--    id에는 MapperInterface의 메소드 이름을 기입합니다.-->
 <!--    resultType에는 그 메소드의 반환값 타입을 입력해줍니다.-->
+<!--    parameterType에는 그 메소드의 매개볏수를 입력해줍니다. 필요하지 않은 경우는 생략 가능합니다.-->
     <select id="selectMethod" resultType="int">
 --         여기에 select SQL문을 작성
         select count(*) from Table
