@@ -16,6 +16,7 @@
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+
     <title>글등록페이지</title>
 </head>
 <body>
@@ -48,6 +49,8 @@
         </a>
     </nav>
 
+<%--    <form action="" method="post" name="insertform" enctype="multipart/form-data">--%>
+
     <div class="created-wrap">
         <div class="flex">
             <div class="left-box">
@@ -61,18 +64,19 @@
                 </div>
                 <div class="filebox">
                     <input class="upload-name" value="첨부파일" placeholder="첨부파일" disabled>
-                    <label for="file">파일찾기</label> 
-                    <input type="file" id="file" onchange="readURL(this)">
+                    <label for="file">파일찾기</label>
+                    <%-- accept="image/*"은 올릴 수 있는 파일 유형을 이미지로 제한하는 것 --%>
+                    <input type="file" id="file" name="image" accept="image/*" onchange="readURL(this)">
                 </div>
             </div>
             <div class="right-box">
                 <div class="created-titles">제목</div>
-                <input class="created-inputs" type="text" placeholder="제목을 입력하세요."/>
+                <input class="created-inputs" type="text" id="title" name="title" placeholder="제목을 입력하세요."/>
                 <div class="created-titles">내용</div>
-                <textarea class="created-content" placeholder="내용을 입력하세요."></textarea>
+                <textarea class="created-content" id="postcontent" name="postcontent" placeholder="내용을 입력하세요."></textarea>
                 <!-- 태그 등록 시 바로 밑에 보이기 -->
                 <label for="tags" class="created-titles flex">해시태그</label>
-                <input id="tags" class="created-inputs" type="text" placeholder="Enter로 추가해보세요."/>
+                <input id="tags" class="created-inputs" name="hashtag" type="text" placeholder="Enter로 추가해보세요."/>
                 <div id="tag-box">
                     <!-- <div>
                         <span class="tag">#크리스마스&nbsp;</span>
@@ -82,14 +86,14 @@
                     </div> -->
                 </div>
                 <div class="flex btn-box">
-                    <button class="upload-btn" type="button">등록</button>
+                    <button class="upload-btn" type="button" onclick="checkIt()">등록</button>
                 </div>
                 
             </div>
         </div>
-            
-       
     </div>
+
+<%--    </form>--%>
 
     
 
@@ -97,94 +101,58 @@
 </body>
 
 <script>
-    // 파일 선택 시 첨부파일input칸에 채우는 js
-    $('#file').on('change',function(){
-        var fileName = $('#file').val();
-        $(".upload-name").val(fileName);
-    });
 
-    //파일 첨부 시 미리보기 js
-    var previewElement = document.getElementById('preview');
-    var imageBox = document.getElementsByClassName('image-text-box')[0];
-    var imageText = document.getElementsByClassName('image-text')[0];
 
-    function readURL(input) {
-        if (input.files && input.files[0]) {
 
-            var reader = new FileReader();
+    // -- 서버로 데이터 보내기 --
 
-            //파일 첨부 읽으면
-            reader.onload = function(e) {
-                //target의 결과 src에 담기
-                previewElement.src = e.target.result;
-                //이미지 크기 등 css
-                previewElement.style.width = '400px';
-                previewElement.style.height = '450px';
-                previewElement.style.borderRadius = '20px';
-                imageBox.style.border = 'none';
-                //'이미지를 선택하세요' 텍스트 지우기
-                imageText.classList.add('hidden');
-            };
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            document.getElementById('preview').src = "";
-        }
-    }
+    //FormData 객체 생성
 
-    //해시태그 추가 js
-    const tagsInput = document.getElementById('tags');
-    const tagBox = document.getElementById('tag-box');
 
-    let hashtags = [];
 
-    function addTags(tag){
-        tag = tag.replace(/[\[\]]/g,'').trim(); //[]와 양쪽 공백 제거
+    // Fetch API를 사용하여 서버로 데이터 전송
 
-        //입력된 값이 있고 이미 추가된 태그가 아닐 때! 
-        if(tag && !hashtags.includes(tag)){
 
-            const div = document.createElement('div'); //div태그 생성
-            div.classList.add('aa');
 
-            const span = document.createElement('span'); //span태그 생성
-            span.innerText = '#' + tag + ' ';
-            span.classList.add('tag');
+    //서버로 데이터 보내기
+    <%--function check(){--%>
+    <%--    f = document.insertform;--%>
 
-            //추가한 태그 삭제 이벤트
-            const xBtn = document.createElement("button"); //button태그 생성
-            xBtn.innerText = 'x ';
-            xBtn.classList.add('tag-xBtn');
+    <%--    str = f.title.value;--%>
+    <%--    str = str.trim();--%>
+    <%--    if(!str){--%>
+    <%--        alert("제목을 입력해주세요.");--%>
+    <%--        f.title.focus();--%>
+    <%--        return;--%>
+    <%--    }--%>
+    <%--    f.title.value = str;--%>
 
-            tagBox.appendChild(div);
-            div.appendChild(span);
-            div.appendChild(xBtn);
-            hashtags.push(tag);
+    <%--    str = f.postcontent.value;--%>
+    <%--    str = str.trim();--%>
+    <%--    if(!str){--%>
+    <%--        alert("내용을 입력해주세요.");--%>
+    <%--        f.postcontent.focus();--%>
+    <%--        return;--%>
+    <%--    }--%>
+    <%--    f.postcontent.value = str;--%>
 
-            console.log(hashtags);
+    <%--    // 파일 선택 여부 확인--%>
+    <%--    if (!fileData) {--%>
+    <%--        alert("이미지를 선택해주세요.");--%>
+    <%--        return;--%>
+    <%--    }--%>
 
-            //x버튼 클릭 시 이벤트
-            xBtn.addEventListener('click',()=>{
-                tagBox.removeChild(div);
-                hashtags = hashtags.filter((hashtag) => hashtag !== tag); //중복 검사 후 중복 시 저장하지 않음 
-            })
-        }
-    }
+    <%--    //파일의 정보를 보냄--%>
+    <%--    let formData = new FormData(f);--%>
+    <%--    formData.append('image', fileData); // 'image'는 필드 이름, 'fileData'은 파일 데이터--%>
 
-    tagsInput.addEventListener('keydown', (event) => {
+    <%--    &lt;%&ndash;f.action = "<%=cp%>/created";&ndash;%&gt;--%>
+    <%--    &lt;%&ndash;f.submit();&ndash;%&gt;--%>
 
-        //엔터가 입력되면
-        if(event.key === 'Enter'){
-
-            event.preventDefault();
-            const tag = tagsInput.value.trim();
-            if(tag){
-                addTags(tag); //추가함수 호출
-                tagsInput.value = '';
-            }
-        }
-    });
-
+    <%--}--%>
 
 </script>
+
+<script type="text/javascript" src="resources/js/created.js"></script>
 
 </html>

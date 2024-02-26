@@ -5,6 +5,31 @@
 
 <mapper namespace="com.project.moapicture.mapper.CreatedMapper">
 
+    <!-- post_id maxnum -->
+    <select id="postMaxNum" resultType="int">
+        select nvl(max(post_id),0) from post
+    </select>
+
+    <!-- image_id maxnum -->
+    <select id="imageMaxNum" resultType="int">
+        select nvl(max(image_id),0) from image
+    </select>
+
+    <!-- tag_id maxnum -->
+    <select id="tagMaxNum" resultType="int">
+        select nvl(max(tag_id),0) from hashtag
+    </select>
+
+    <!-- like_id maxnum -->
+    <select id="likeMaxNum" resultType="int">
+        select nvl(max(like_id),0) from user_like
+    </select>
+
+    <!-- user_nicname 조회 -->
+    <select id="selectNickname" parameterType="String" resultType="String">
+        select user_nickname from user_info where user_email=#{user_email}
+    </select>
+
     <!-- post테이블 insert -->
     <insert id="insertPost" parameterType="com.project.moapicture.dto.PostDTO">
         insert into post (post_id,user_email,post_title,post_content,user_nickname)

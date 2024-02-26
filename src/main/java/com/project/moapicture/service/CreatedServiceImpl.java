@@ -17,6 +17,31 @@ public class CreatedServiceImpl implements CreatedService {
 
 
     @Override
+    public int postMaxNum() throws Exception {
+        return createdMapper.postMaxNum();
+    }
+
+    @Override
+    public int imageMaxNum() throws Exception {
+        return createdMapper.imageMaxNum();
+    }
+
+    @Override
+    public int tagMaxNum() throws Exception {
+        return createdMapper.tagMaxNum();
+    }
+
+    @Override
+    public int likeMaxNum() throws Exception {
+        return createdMapper.likeMaxNum();
+    }
+
+    @Override
+    public String selectNickname(String user_email) throws Exception {
+        return createdMapper.selectNickname(user_email);
+    }
+
+    @Override
     public void insertPost(int post_id, String user_email, String post_title, String post_content, String user_nickname) throws Exception {
         createdMapper.insertPost(post_id,user_email,post_title,post_content,user_nickname);
     }
@@ -27,13 +52,13 @@ public class CreatedServiceImpl implements CreatedService {
     }
 
     @Override
-    public void insertHashtag(HashtagDTO hashtagDTO) throws Exception {
-        createdMapper.insertHashtag(hashtagDTO);
+    public void insertHashtag(int tag_id, String tag_name) throws Exception {
+        createdMapper.insertHashtag(tag_id,tag_name);
     }
 
     @Override
-    public void insertPostHashtag(PostHashtagDTO postHashtagDTO) throws Exception {
-        createdMapper.insertPostHashtag(postHashtagDTO);
+    public void insertPostHashtag(int post_id, int tag_id) throws Exception {
+        createdMapper.insertPostHashtag(post_id,tag_id);
     }
 
     @Override
