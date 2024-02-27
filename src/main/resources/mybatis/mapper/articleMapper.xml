@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.moapicture.mapper.ArticleMapper">
+
+    <!-- article select -->
+    <select id="getReadData" parameterType="int" resultType="com.project.moapicture.dto.PostDTO">
+        select i.image_savename,p.post_title,p.post_content,p.user_nickname,to_char(p.pcreated_date, 'yyyy.mm.dd'),p.user_email,p.like_count
+        from image i, post p
+        where i.post_id=p.post_id and p.post_id=#{post_id}
+    </select>
+
+    <!-- article hashtag select -->
+    <select id="getHashtag" parameterType="int" resultType="com.project.moapicture.dto.HashtagDTO">
+        select h.tag_name
+        from hashtag h
+        join post_hashtag ph on h.tag_id=ph.tag_id
+        where ph.post_id=#{post_id}
+    </select>
+</mapper>

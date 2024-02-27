@@ -47,9 +47,10 @@ public class CreatedServiceImpl implements CreatedService {
     }
 
     @Override
-    public void insertImage(ImageDTO imageDTO) throws Exception {
-        createdMapper.insertImage(imageDTO);
+    public void insertImage(int image_id, String image_savename, String image_originalname, String image_url, int post_id) throws Exception {
+        createdMapper.insertImage(image_id, image_savename, image_originalname, image_url, post_id);
     }
+
 
     @Override
     public void insertHashtag(int tag_id, String tag_name) throws Exception {

@@ -15,4 +15,7 @@ public class PostDTO {
     private int hitcount;
     private int like_count;
 
+    //article select할 때 image와 jain해서 추가
+    private String image_savename;
+
 }

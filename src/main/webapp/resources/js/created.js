@@ -143,19 +143,27 @@ function checkIt(){
         method: 'POST',
         body: formData
     })
-        .then(response => {
-            if (response.ok) {
-                alert("굿")
-                window.location.href = '/article';
-                //return response.json(); // 서버에서 반환한 데이터 처리
-            }
-            throw new Error('Network response was not ok.');
-        })
+        .then(response => response.json())
         .then(data => {
-            console.log('Server response:', data);
+            console.log('postId: ', data.postId);
+            return window.location.href = '/article?id=' + data.postId;
         })
         .catch(error => {
-            console.error('Error sending data to server:', error);
+            console.error('Error:', error);
         });
+
+    // .then(response => {
+    //         if (response.ok) {
+    //             alert("굿>>" + response);
+    //             return window.location.href = '/article';
+    //         }
+    //         throw new Error('Network response was not ok.');
+    //     })
+    //     .then(data => {
+    //         console.log('Server response:', data);
+    //     })
+    //     .catch(error => {
+    //         console.error('Error sending data to server:', error);
+    //     });
 
 }

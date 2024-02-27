@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
     request.setCharacterEncoding("UTF-8");
@@ -61,13 +62,13 @@
 
     <div class="article-wrap flex">
         <div class="article-image">
-            <img src="/images/logPicture10.jpeg"/>
+            <img src="/images/${postDTO.image_savename}"/>
         </div>
         <div class="article-content">
             <div class="content-up-1 flex">
                 <div>
-                    <div style="font-size: 15pt;margin-bottom: 10px;">yunssii</div>
-                    <div style="font-size: 10pt;">2023.10.01</div>
+                    <div style="font-size: 15pt;margin-bottom: 10px;">${postDTO.user_nickname}</div>
+                    <div style="font-size: 10pt;">${postDTO.pcreated_date}</div>
                 </div>
                 <div class="content-up-2 flex">
                     <span class="material-symbols-outlined">
@@ -79,11 +80,12 @@
 
             <div class="content-scroll-box">
                 <div class="content-middle">
-                    <div class="content-title">해피 홀리데이🎄</div>
-                    <div class="content-text">제가 그린 크리스마스 포스터입니다!!</div>
+                    <div class="content-title">${postDTO.post_title}</div>
+                    <div class="content-text">${postDTO.post_content}</div>
                     <div>
-                        <button class="content-tag" type="button">#크리스마스</button>
-                        <button class="content-tag" type="button">#포스터</button>
+                        <c:forEach var="hashtags" items="${hashtagList}">
+                            <button class="content-tag" type="button">${hashtags.tag_name}</button>
+                        </c:forEach>
                     </div>
                 </div>
                 <hr/>
