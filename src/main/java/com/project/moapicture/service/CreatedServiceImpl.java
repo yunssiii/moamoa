@@ -66,4 +66,19 @@ public class CreatedServiceImpl implements CreatedService {
     public void insertUserLike(int like_id, int post_id, String user_email) throws Exception {
         createdMapper.insertUserLike(like_id,post_id,user_email);
     }
+
+    @Override
+    public void updatePost(String post_title, String post_content, int post_id) throws Exception {
+        createdMapper.updatePost(post_title, post_content, post_id);
+    }
+
+    @Override
+    public void updateImage(String image_savename, String image_originalname, String image_url, int post_id) throws Exception {
+        createdMapper.updateImage(image_savename, image_originalname, image_url, post_id);
+    }
+
+    @Override
+    public void deleteHashtags(int post_id) throws Exception {
+        createdMapper.deleteHashtags(post_id);
+    }
 }

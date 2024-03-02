@@ -27,6 +27,20 @@
 
         .material-symbols-outlined:hover{
             cursor: pointer;
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+        }
+
+        .saveclicked {
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+            font-size: 25pt;
         }
     </style>
 </head>
@@ -71,12 +85,26 @@
                     <div style="font-size: 10pt;">${postDTO.pcreated_date}</div>
                 </div>
                 <div class="content-up-2 flex">
+                    <c:if test="${email eq postDTO.user_email}">
+                        <input type="button" value="수정" class="post-update-btn" onclick="location.href='updated?id=' + '${postDTO.post_id}'">
+                        <input type="button" value="삭제" class="post-update-btn post-delete-btn" onclick="location.href='delete?id=' + '${postDTO.post_id}'">
+                    </c:if>
                     <span class="material-symbols-outlined">
                         download
                     </span>
-                    <button class="content-save-btn" type="button">저장</button>
+
+                    <button class="content-save-btn" type="button" >
+                        <span class="material-symbols-outlined" id="saveBtn" onclick="saveBtnClicked()">
+                            bookmark
+                        </span>
+                    </button>
                 </div>
             </div>
+
+
+            <script type="text/javascript">
+
+            </script>
 
             <div class="content-scroll-box">
                 <div class="content-middle">
@@ -125,4 +153,7 @@
 
 
 </body>
+
+<script type="text/javascript" src="resources/js/article.js"></script>
+
 </html>

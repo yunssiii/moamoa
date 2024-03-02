@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
     request.setCharacterEncoding("UTF-8");
@@ -71,22 +72,22 @@
             </div>
             <div class="right-box">
                 <div class="created-titles">제목</div>
-                <input class="created-inputs" type="text" id="title" name="title" placeholder="제목을 입력하세요."/>
+                <input class="created-inputs" type="text" id="title" name="title" placeholder="제목을 입력하세요." value="${postDTO.post_title}"/>
                 <div class="created-titles">내용</div>
-                <textarea class="created-content" id="postcontent" name="postcontent" placeholder="내용을 입력하세요."></textarea>
+                <textarea class="created-content" id="postcontent" name="postcontent" placeholder="내용을 입력하세요.">${postDTO.post_content}</textarea>
                 <!-- 태그 등록 시 바로 밑에 보이기 -->
                 <label for="tags" class="created-titles flex">해시태그</label>
                 <input id="tags" class="created-inputs" name="hashtag" type="text" placeholder="Enter로 추가해보세요."/>
                 <div id="tag-box">
-                    <!-- <div>
-                        <span class="tag">#크리스마스&nbsp;</span>
-                        <button class="tag-xBtn">
-                            x
-                        </button>
-                    </div> -->
+                    <!-- 태그 추가될 자리 -->
                 </div>
                 <div class="flex btn-box">
-                    <button class="upload-btn" type="button" onclick="checkIt()">등록</button>
+                    <c:if test="${postId eq null}">
+                        <button class="upload-btn" type="button" onclick="createdIt(${postId})">등록</button>
+                    </c:if>
+                    <c:if test="${postId ne null}">
+                        <button class="upload-btn" type="button" onclick="createdIt(${postId})">수정</button>
+                    </c:if>
                 </div>
                 
             </div>
@@ -101,6 +102,10 @@
 </body>
 
 <script>
+
+
+
+    //var postId = ${postId};
 
 
 

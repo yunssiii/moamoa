@@ -26,4 +26,9 @@ public class ArticleServiceImpl implements ArticleService {
     public List<HashtagDTO> getHashtag(int postId) throws Exception {
         return articleMapper.getHashtag(postId);
     }
+
+    @Override
+    public void deletePost(int post_id) throws Exception {
+        articleMapper.deletePost(post_id);
+    }
 }

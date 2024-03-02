@@ -12,4 +12,7 @@ public interface ArticleService {
     public PostDTO getReadData(@Param("post_id") int postId) throws Exception;
     public List<HashtagDTO> getHashtag(@Param("post_id") int postId) throws Exception;
 
+    //--여기부터는 삭제!! --------------------------
+    public void deletePost(@Param("post_id")int post_id) throws Exception;
+
 }

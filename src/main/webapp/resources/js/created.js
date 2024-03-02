@@ -96,13 +96,13 @@ $(document).on("change", "input[name='image']", function() {
     console.log("imageData는?>>>>>>>>> ", imageData);
 });
 
-//input 유효성 확인
 const title = document.getElementById('title');
 const content = document.getElementById('postcontent');
 
 var formData = new FormData();
 
-function checkIt(){
+//-- 글 등록할 때 보내기 ---------------------------------------------------------
+function createdIt(postId){
 
     if(!title.value){
         alert("제목을 입력해주세요.");
@@ -134,23 +134,54 @@ function checkIt(){
         });
     }
 
-    console.log('title>>>>>>>>>'+title.value);
-    console.log('content>>>>>>>>>'+content.value);
-    console.log('imageData>>>>>>>>>'+imageData);
-    console.log('hashtags[]>>>>>>>>>'+hashtags);
+    // console.log('title>>>>>>>>>'+title.value);
+    // console.log('content>>>>>>>>>'+content.value);
+    // console.log('imageData>>>>>>>>>'+imageData);
+    // console.log('hashtags[]>>>>>>>>>'+hashtags);
 
-    fetch('/created', {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('postId: ', data.postId);
-            return window.location.href = '/article?id=' + data.postId;
+    console.log("postId >>>" + postId);
+
+    //postId가 없으면 글 등록 ajax
+    if (postId == null){
+
+        console.log("왓ㄴ;??")
+
+
+        formData.append('id',"0");
+
+        fetch('/created', {
+            method: 'POST',
+            body: formData
         })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log('postId: ', data.postId);
+                return window.location.href = '/article?id=' + data.postId;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+    }else { //postId가 있으면 수정 ajax
+
+        console.log("여기로 왓니?")
+
+        fetch('/created?id='+postId, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('postId: ', data.postId);
+                return window.location.href = '/article?id=' + data.postId;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+    }
+
+
 
     // .then(response => {
     //         if (response.ok) {

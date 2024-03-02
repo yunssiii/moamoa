@@ -7,7 +7,7 @@
 
     <!-- article select -->
     <select id="getReadData" parameterType="int" resultType="com.project.moapicture.dto.PostDTO">
-        select i.image_savename,p.post_title,p.post_content,p.user_nickname,to_char(p.pcreated_date, 'yyyy.mm.dd'),p.user_email,p.like_count
+        select i.image_savename,p.post_id,p.post_title,p.post_content,p.user_nickname,to_char(p.pcreated_date, 'yyyy.mm.dd') pcreated_date,p.user_email,p.like_count
         from image i, post p
         where i.post_id=p.post_id and p.post_id=#{post_id}
     </select>
@@ -19,4 +19,10 @@
         join post_hashtag ph on h.tag_id=ph.tag_id
         where ph.post_id=#{post_id}
     </select>
+
+    <!-- 게시글 삭제 -->
+    <delete id="deletePost" parameterType="int">
+        delete from post where post_id=#{post_id}
+    </delete>
+
 </mapper>

@@ -60,4 +60,21 @@
         values (#{like_id},#{post_id},#{user_email})
     </insert>
 
+    <!-- 여기부터는 수정!! -->
+
+    <!-- post테이블 update -->
+    <update id="updatePost" parameterType="com.project.moapicture.dto.PostDTO">
+        update post set post_title=#{post_title},post_content=#{post_content},pupdated_date=sysdate where post_id=#{post_id}
+    </update>
+
+    <!-- image테이블 update -->
+    <update id="updateImage" parameterType="com.project.moapicture.dto.ImageDTO">
+        update image set image_savename=#{image_savename},image_originalname=#{image_originalname},image_url=#{image_url} where post_id=#{post_id}
+    </update>
+
+    <!-- hashtag와 post_hashtag테이블 수정을 위한 delete -->
+    <delete id="deleteHashtags" parameterType="int">
+        delete from post_hashtag where post_id=#{post_id}
+    </delete>
+
 </mapper>
