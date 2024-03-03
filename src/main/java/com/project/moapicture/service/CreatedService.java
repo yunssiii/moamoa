@@ -12,7 +12,7 @@ public interface CreatedService {
     public int postMaxNum()  throws Exception;
     public int imageMaxNum()  throws Exception;
     public int tagMaxNum()  throws Exception;
-    public int likeMaxNum()  throws Exception;
+    //public int likeMaxNum()  throws Exception;
 
     //post에 insert할 닉네임 조회
     public String selectNickname(@Param("user_email") String user_email) throws Exception;
@@ -26,7 +26,7 @@ public interface CreatedService {
                             @Param("post_id") int post_id) throws Exception;
     public void insertHashtag(@Param("tag_id") int tag_id,@Param("tag_name") String tag_name) throws Exception;
     public void insertPostHashtag(@Param("post_id") int post_id,@Param("tag_id") int tag_id) throws Exception;
-    public void insertUserLike(@Param("like_id") int like_id, @Param("post_id") int post_id, @Param("user_email") String user_email) throws Exception;
+    //public void insertUserLike(@Param("like_id") int like_id, @Param("post_id") int post_id, @Param("user_email") String user_email) throws Exception;
 
     //--여기부터는 수정!! --------------------------
     public void updatePost(@Param("post_title")String post_title, @Param("post_content")String post_content,@Param("post_id") int post_id) throws Exception;

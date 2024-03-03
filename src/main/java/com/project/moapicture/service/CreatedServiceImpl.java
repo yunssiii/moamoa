@@ -32,11 +32,6 @@ public class CreatedServiceImpl implements CreatedService {
     }
 
     @Override
-    public int likeMaxNum() throws Exception {
-        return createdMapper.likeMaxNum();
-    }
-
-    @Override
     public String selectNickname(String user_email) throws Exception {
         return createdMapper.selectNickname(user_email);
     }
@@ -60,11 +55,6 @@ public class CreatedServiceImpl implements CreatedService {
     @Override
     public void insertPostHashtag(int post_id, int tag_id) throws Exception {
         createdMapper.insertPostHashtag(post_id,tag_id);
-    }
-
-    @Override
-    public void insertUserLike(int like_id, int post_id, String user_email) throws Exception {
-        createdMapper.insertUserLike(like_id,post_id,user_email);
     }
 
     @Override

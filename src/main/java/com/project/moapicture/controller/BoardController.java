@@ -1,6 +1,7 @@
 package com.project.moapicture.controller;
 
 import com.project.moapicture.dto.HashtagDTO;
+import com.project.moapicture.dto.LikeDTO;
 import com.project.moapicture.dto.PostDTO;
 import com.project.moapicture.service.ArticleService;
 import com.project.moapicture.service.CreatedService;
@@ -11,6 +12,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -192,42 +195,90 @@ public class BoardController {
 
     }
 
-    @RequestMapping(value="/article", method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value="/article", method = RequestMethod.GET)
     public ModelAndView article(HttpServletRequest request, @RequestParam(name = "id") String postId) throws Exception {
 
         String email = "hchdbsgk@naver.com"; //일단 하드코딩
 
         ModelAndView mav = new ModelAndView();
 
-        System.out.println("?로 넘어온 값..?>>>>>" + postId);
+        System.out.println("프론트에서 넘어온 postId>>>>>" + postId);
 
         int intPostId = Integer.parseInt(postId);
+        int myLikeId = articleService.getLikeId(email,intPostId);
+        List<LikeDTO> dtoLikeId = articleService.getAllLikeId(intPostId);
 
+        //article 조회
         PostDTO postDTO = articleService.getReadData(intPostId);
-
-//        System.out.println("이미지이름>>>>>>" + postDTO.getImage_savename());
-//        System.out.println("날짜>>>>>>>>"+postDTO.getPcreated_date());
 
         if(postDTO == null){
             mav.setViewName("redirect:/main");
             return mav;
         }
 
+        //해시태그는 여러 개일 수도 있으니 list에 담기
         List<HashtagDTO> hashtagList = articleService.getHashtag(intPostId);
 
         mav.addObject("postDTO",postDTO);
         mav.addObject("hashtagList",hashtagList);
         mav.addObject("email",email);
+        mav.addObject("myLikeId",myLikeId);
+
+//        System.out.println("세션이메일>>>>>>>" + email);
+//        System.out.println("dto이메일>>>>>>>>>>>" + postDTO.getUser_email());
+//        System.out.println("dto아이디>>>>>>>>>>" + postDTO.getPost_id());
 
 
-        System.out.println("세션이메일>>>>>>>" + email);
-        System.out.println("dto이메일>>>>>>>>>>>" + postDTO.getUser_email());
-        System.out.println("dto아이디>>>>>>>>>>" + postDTO.getPost_id());
 
         mav.setViewName("article");
 
         return mav;
     }
+
+    @RequestMapping(value="/article", method = RequestMethod.POST)
+    public ResponseEntity<Map<String, String>> article_ok(@RequestBody LikeDTO likeDTO) throws Exception {
+
+        String email = "hchdbsgk@naver.com"; //일단 하드코딩
+        int intPostId = likeDTO.getPost_id();
+        String saveYN = likeDTO.getSaveYN();
+
+        System.out.println("저장 왔니?");
+        System.out.println("likeDTO.getPost_id()>>" + likeDTO.getPost_id());
+        System.out.println("likeDTO.getSaveYN()>>" + likeDTO.getSaveYN());
+
+        //like 테이블 관리
+        if(saveYN.equals("y")){
+
+            System.out.println("saveYN의 y 들어왔니?");
+            //저장 버튼을 누름 -> insert, update+1
+            int likeId = articleService.likeMaxNum()+1; //이걸 공유하는 게 맞나..??ㅜㅜ 머리 안돌아가ㅜㅜ -> 아니넹 이렇게 하면 항상 +1된 거가 되니까 이걸로 삭제할 수 없음
+            int likeCount = articleService.likeCountMaxNum(intPostId) + 1;
+
+            System.out.println("likeCount>>>>" + likeCount);
+
+            articleService.insertLike(likeId,intPostId,email);
+            articleService.updateLikeCount(likeCount,intPostId);
+
+            return new ResponseEntity<>(Map.of("result", "insert 성공"), HttpStatus.OK);
+
+        }else if (saveYN.equals("n")){
+            System.out.println("saveYN의 n 들어왔니?");
+            System.out.println("email : " + email);
+            System.out.println("intPostId : " + intPostId);
+            //저장 버튼 해제함 -> delete, update-1
+            int likeIdDel = articleService.getLikeId(email,intPostId);
+            int likeCount = articleService.likeCountMaxNum(intPostId) - 1;
+
+            articleService.deleteLike(likeIdDel);
+            articleService.updateLikeCount(likeCount,intPostId);
+        }
+
+        //return ResponseEntity.ok().build();
+        return new ResponseEntity<>(Map.of("result", "delete 성공"), HttpStatus.OK);
+
+
+}
+
 
     @RequestMapping(value="/updated", method = RequestMethod.GET)
     public ModelAndView update(@RequestParam(name = "id") String postId) throws Exception {

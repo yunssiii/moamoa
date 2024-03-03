@@ -25,4 +25,39 @@
         delete from post where post_id=#{post_id}
     </delete>
 
+    <!-- like 테이블 insert -->
+    <insert id="insertLike" parameterType="com.project.moapicture.dto.LikeDTO">
+        insert into user_like (like_id,post_id,user_email) values (#{like_id},#{post_id},#{user_email})
+    </insert>
+
+    <!-- like 테이블 delete -->
+    <delete id="deleteLike" parameterType="int">
+        delete from user_like where like_id=#{like_id}
+    </delete>
+
+    <!-- like_id의 maxNum -->
+    <select id="likeMaxNum" resultType="int">
+        select nvl(max(like_id),0) from user_like
+    </select>
+
+    <!-- post 테이블 like 컬럼의 maxnum / like 테이블 insert,delete 시 수정되기 위함 -->
+    <select id="likeCountMaxNum" resultType="int" parameterType="int">
+        select nvl(max(like_count),0) from post where post_id=#{post_id}
+    </select>
+
+    <!-- post테이블 like_count 컬럼 update -->
+    <update id="updateLikeCount" parameterType="com.project.moapicture.dto.PostDTO">
+        update post set like_count=#{like_count} where post_id=#{post_id}
+    </update>
+
+    <!-- like 테이블 삭제할 때 필요한 like_id 조회 -->
+    <select id="getLikeId" parameterType="com.project.moapicture.dto.LikeDTO" resultType="int">
+        select like_id from user_like where user_email=#{user_email} and post_id=#{post_id}
+    </select>
+
+    <!-- 한 게시글이 가진 모든 좋아요아이디 조회 -->
+    <select id="getAllLikeId" parameterType="int" resultType="com.project.moapicture.dto.LikeDTO">
+        select like_id from user_like where post_id=#{post_id}
+    </select>
+
 </mapper>

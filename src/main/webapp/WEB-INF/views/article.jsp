@@ -27,11 +27,6 @@
 
         .material-symbols-outlined:hover{
             cursor: pointer;
-            font-variation-settings:
-            'FILL' 1,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 24;
         }
 
         .saveclicked {
@@ -94,7 +89,8 @@
                     </span>
 
                     <button class="content-save-btn" type="button" >
-                        <span class="material-symbols-outlined" id="saveBtn" onclick="saveBtnClicked()">
+                        <c:if test="${}"
+                        <span class="material-symbols-outlined" id="saveBtn" onclick="saveBtnClicked(${postDTO.post_id})">
                             bookmark
                         </span>
                     </button>

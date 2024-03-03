@@ -20,11 +20,6 @@
         select nvl(max(tag_id),0) from hashtag
     </select>
 
-    <!-- like_id maxnum -->
-    <select id="likeMaxNum" resultType="int">
-        select nvl(max(like_id),0) from user_like
-    </select>
-
     <!-- user_nicname 조회 -->
     <select id="selectNickname" parameterType="String" resultType="String">
         select user_nickname from user_info where user_email=#{user_email}
@@ -52,12 +47,6 @@
     <insert id="insertPostHashtag" parameterType="com.project.moapicture.dto.PostHashtagDTO">
         insert into post_hashtag (post_id,tag_id)
         values (#{post_id},#{tag_id})
-    </insert>
-
-    <!-- user_like테이블 insert -->
-    <insert id="insertUserLike" parameterType="com.project.moapicture.dto.LikeDTO">
-        insert into user_like (like_id,post_id,user_email)
-        values (#{like_id},#{post_id},#{user_email})
     </insert>
 
     <!-- 여기부터는 수정!! -->
