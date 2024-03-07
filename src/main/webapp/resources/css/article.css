@@ -38,6 +38,19 @@ p{margin: 0;}
     height: 9%;
 }
 
+.post-account-btn{
+    margin-bottom: 10px;
+    background: none;
+    border: none;
+    padding: 0px;
+    font-size: 15pt;
+    font-family: 'NanumSquareBold';
+}
+
+.post-account-btn:hover{
+    cursor: pointer;
+}
+
 .content-up-2{
     align-items: center;
 }

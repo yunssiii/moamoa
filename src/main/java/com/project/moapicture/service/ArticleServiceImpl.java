@@ -64,7 +64,14 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<LikeDTO> getAllLikeId(int post_id) throws Exception {
-        return articleMapper.getAllLikeId(post_id);
+    public boolean checkLikeState(int post_id, String user_email) throws Exception {
+
+        //좋아요한 게시글이 있으면 true를 반환 / 없으면 false를 반환
+        return articleMapper.checkLikeState(post_id, user_email) > 0;
     }
+
+//    @Override
+//    public List<String> getAllEmail(int post_id) throws Exception {
+//        return articleMapper.getAllEmail(post_id);
+//    }
 }

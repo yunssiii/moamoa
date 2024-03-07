@@ -205,8 +205,7 @@ public class BoardController {
         System.out.println("프론트에서 넘어온 postId>>>>>" + postId);
 
         int intPostId = Integer.parseInt(postId);
-        int myLikeId = articleService.getLikeId(email,intPostId);
-        List<LikeDTO> dtoLikeId = articleService.getAllLikeId(intPostId);
+        boolean isLike = articleService.checkLikeState(intPostId,email);
 
         //article 조회
         PostDTO postDTO = articleService.getReadData(intPostId);
@@ -222,13 +221,7 @@ public class BoardController {
         mav.addObject("postDTO",postDTO);
         mav.addObject("hashtagList",hashtagList);
         mav.addObject("email",email);
-        mav.addObject("myLikeId",myLikeId);
-
-//        System.out.println("세션이메일>>>>>>>" + email);
-//        System.out.println("dto이메일>>>>>>>>>>>" + postDTO.getUser_email());
-//        System.out.println("dto아이디>>>>>>>>>>" + postDTO.getPost_id());
-
-
+        mav.addObject("isLike",isLike);
 
         mav.setViewName("article");
 
@@ -276,7 +269,6 @@ public class BoardController {
         //return ResponseEntity.ok().build();
         return new ResponseEntity<>(Map.of("result", "delete 성공"), HttpStatus.OK);
 
-
 }
 
 
@@ -308,17 +300,6 @@ public class BoardController {
 
         System.out.println("삭제 완료");
 
-//        //삭제 후 완료 알림 띄우기
-//        response.setContentType("text/html; charset=euc-kr"); //한글설정
-//        PrintWriter out = response.getWriter();
-//        out.println("<script>alert('삭제 완료되었습니다.');</script> ");
-//        out.flush();
-//
-//        ModelAndView mav = new ModelAndView();
-//
-//        mav.setViewName("redirect:/main");
-//
-//        return mav;
         response.setContentType("text/html; charset=euc-kr");
         PrintWriter out = response.getWriter();
         out.println("<script>");

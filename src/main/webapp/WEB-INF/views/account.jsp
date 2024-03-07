@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%
+    request.setCharacterEncoding("UTF-8");
+    String cp = request.getContextPath();
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- css -->
-    <link rel="stylesheet" href="../css/nav.css"/>
-    <link rel="stylesheet" href="../css/account.css"/>
-    <title>메인페이지</title>
+    <link rel="stylesheet" href="/resources/css/nav.css"/>
+    <link rel="stylesheet" href="/resources/css/account.css"/>
+    <title>계정페이지</title>
     <script>
         // masonry 레이아웃 js
         function SetGridItemHeight(){

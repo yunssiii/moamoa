@@ -76,7 +76,7 @@
         <div class="article-content">
             <div class="content-up-1 flex">
                 <div>
-                    <div style="font-size: 15pt;margin-bottom: 10px;">${postDTO.user_nickname}</div>
+                    <input type="button" value="${postDTO.user_nickname}" class="post-account-btn" onclick="location.href='profile/' + '${postDTO.user_nickname}'">
                     <div style="font-size: 10pt;">${postDTO.pcreated_date}</div>
                 </div>
                 <div class="content-up-2 flex">
@@ -89,10 +89,21 @@
                     </span>
 
                     <button class="content-save-btn" type="button" >
-                        <c:if test="${}"
-                        <span class="material-symbols-outlined" id="saveBtn" onclick="saveBtnClicked(${postDTO.post_id})">
-                            bookmark
-                        </span>
+                            <!-- 로그인한 사용자가 좋아요를 한 게시글일 경우 -->
+                            <c:if test="${isLike}">
+                                <span class="material-symbols-outlined saveclicked" id="saveBtn" onclick="saveBtnClicked(${postDTO.post_id})">
+                                    bookmark
+                                </span>
+                            </c:if>
+                            <!-- 로그인한 사용자가 좋아요를 안한 게시글일 경우 -->
+                            <c:if test="${not isLike}">
+                                <span class="material-symbols-outlined" id="saveBtn" onclick="saveBtnClicked(${postDTO.post_id})">
+                                    bookmark
+                                </span>
+                            </c:if>
+
+
+
                     </button>
                 </div>
             </div>

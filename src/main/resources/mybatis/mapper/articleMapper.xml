@@ -55,9 +55,16 @@
         select like_id from user_like where user_email=#{user_email} and post_id=#{post_id}
     </select>
 
-    <!-- 한 게시글이 가진 모든 좋아요아이디 조회 -->
-    <select id="getAllLikeId" parameterType="int" resultType="com.project.moapicture.dto.LikeDTO">
-        select like_id from user_like where post_id=#{post_id}
+    <!-- 한 게시글이 가진 모든 이메일 조회 //삭제 보류!!
+    <select id="getAllEmail" parameterType="int" resultType="java.lang.String">
+        select user_email from user_like where post_id=#{post_id}
+    </select>
+    -->
+
+    <!-- 사용자가 특정 게시글에 좋아요를 눌렀는지 확인하는 쿼리 -->
+    <select id="checkLikeState" parameterType="com.project.moapicture.dto.LikeDTO" resultType="int">
+        select count(*) likecount from user_like
+        where post_id =#{post_id} and user_email = #{user_email}
     </select>
 
 </mapper>

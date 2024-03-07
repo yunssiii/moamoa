@@ -28,6 +28,8 @@ public interface ArticleMapper {
     public int likeCountMaxNum(@Param("post_id")int post_id) throws Exception;
     public void updateLikeCount(@Param("like_count")int like_count, @Param("post_id")int post_id) throws Exception;
     public int getLikeId(@Param("user_email")String user_email, @Param("post_id")int post_id) throws Exception;
-    public List<LikeDTO> getAllLikeId(@Param("post_id")int post_id) throws Exception;
+    //public List<String> getAllEmail(@Param("post_id")int post_id) throws Exception;
+
+    public int checkLikeState(@Param("post_id")int post_id,@Param("user_email")String user_email) throws Exception;
 
 }
