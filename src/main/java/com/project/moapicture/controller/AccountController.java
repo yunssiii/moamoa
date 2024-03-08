@@ -52,7 +52,7 @@ public class AccountController {
             System.out.println("다른 계정 이메일>>" + otherEmail);
 
             if(otherEmail == null){
-                mav.setViewName("redirect:/main");
+                mav.setViewName("redirect:/logpicture");
             }else {
                 UserInfoDTO otherInfoDTO = mypageService.getMyInfo(otherEmail);
                 List<PostDTO> otherPostList = mypageService.getMyPost(otherEmail);

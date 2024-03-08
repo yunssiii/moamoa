@@ -101,9 +101,6 @@
                                     bookmark
                                 </span>
                             </c:if>
-
-
-
                     </button>
                 </div>
             </div>
@@ -119,7 +116,7 @@
                     <div class="content-text">${postDTO.post_content}</div>
                     <div>
                         <c:forEach var="hashtags" items="${hashtagList}">
-                            <button class="content-tag" type="button">${hashtags.tag_name}</button>
+                            <input class="content-tag" type="button" value="${hashtags.tag_name}" onclick="location.href='logpicture/' + '${hashtags.tag_name}'">
                         </c:forEach>
                     </div>
                 </div>

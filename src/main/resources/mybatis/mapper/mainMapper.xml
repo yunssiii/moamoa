@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.moapicture.mapper.MainMapper">
+
+    <!-- 태그명으로 게시글아이디와 해시태그 정보 조회 -->
+    <select id="getPostIdFromTag" resultType="com.project.moapicture.dto.HashtagDTO" parameterType="java.lang.String">
+        select ph.post_id, h.tag_name, h.tag_id
+        from hashtag h
+        join post_hashtag ph on h.tag_id=ph.tag_id
+        where tag_name in #{tag_name}
+    </select>
+
+    <!-- 게시글아이디로 게시글 정보 조회 -->
+    <select id="getTagPost" resultType="com.project.moapicture.dto.PostDTO" parameterType="int">
+        select p.post_id, p.post_title, p.pcreated_date, p.like_count, i.image_savename
+        from post p
+        join image i on i.post_id=p.post_id
+        where p.post_id in #{post_id}
+    </select>
+
+</mapper>

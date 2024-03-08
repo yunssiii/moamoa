@@ -72,20 +72,28 @@ function addTags(tag){
 }
 
 //해시태그 input에서 엔터 입력 시 해시태그div 생성하는 js
+//해시태그에 특수문자 포함되지 않도록 함
 tagsInput.addEventListener('keydown', (event) => {
+
+    var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-+┼<>@\#$%&\'\"\\\(\=]/gi; //특수문자 검사 정규식
 
     //엔터가 입력되면
     if(event.key === 'Enter'){
 
         event.preventDefault();
-        const tag = tagsInput.value.trim();
-        if(tag){
-            addTags(tag); //추가함수 호출
+
+        if (regExp.test(tagsInput.value)){ //검사
+            alert('해시태그에는 문자, 숫자, 밑줄(_)만 입력할 수 있습니다.');
             tagsInput.value = '';
+        }else {
+            const tag = tagsInput.value.trim();
+            if(tag){
+                addTags(tag); //추가함수 호출
+                tagsInput.value = '';
+            }
         }
     }
 });
-
 
 
 // 업로드할 파일 정보 불러오기

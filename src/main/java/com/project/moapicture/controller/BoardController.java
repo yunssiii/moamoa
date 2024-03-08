@@ -211,7 +211,7 @@ public class BoardController {
         PostDTO postDTO = articleService.getReadData(intPostId);
 
         if(postDTO == null){
-            mav.setViewName("redirect:/main");
+            mav.setViewName("redirect:/logpicture");
             return mav;
         }
 
@@ -304,7 +304,7 @@ public class BoardController {
         PrintWriter out = response.getWriter();
         out.println("<script>");
         out.println("alert('삭제 완료되었습니다.');");
-        out.println("location.href='/main';"); // 리다이렉트
+        out.println("location.href='/logpicture';"); // 리다이렉트
         out.println("</script>");
         out.flush();
 
