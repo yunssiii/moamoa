@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.moapicture.mapper.AccountMapper">
+
+    <!-- 로그인한 사용자 닉네임 가져오는 쿼리 -->
+    <select id="getNicfromEmail" resultType="java.lang.String" parameterType="java.lang.String">
+        select user_nickname from user_info where user_email=#{user_email}
+    </select>
+
+    <!-- 닉네임으로 이메일 가져오는 쿼리 -->
+    <!-- ~내 계정, 다른 계정 둘 다 사용~ -->
+    <select id="getEmailfromNic" resultType="java.lang.String" parameterType="java.lang.String">
+        select user_email from user_info where user_nickname=#{user_nickname}
+    </select>
+
+    <!-- 계정 정보(이메일, 닉네임) 조회 -->
+    <!-- ~내 계정, 다른 계정 둘 다 사용~ -->
+    <select id="getMyInfo" resultType="com.project.moapicture.dto.UserInfoDTO" parameterType="java.lang.String">
+        select user_email,user_nickname from user_info where user_email=#{user_email}
+    </select>
+
+    <!-- 내가 좋아요한 모든 게시글의 게시글정보 조회 -->
+    <select id="getLikedPost" resultType="com.project.moapicture.dto.PostDTO" parameterType="java.lang.String">
+        select p.post_id, i.image_savename, p.post_title
+        from post p
+        join image i on i.post_id=p.post_id
+        where p.post_id in (select post_id from user_like where user_email in #{user_email})
+    </select>
+
+    <!-- 내가 작성한 모든 게시글 정보 가져오기 -->
+    <!-- ~내 계정, 다른 계정 둘 다 사용~ -->
+    <select id="getMyPost" resultType="com.project.moapicture.dto.PostDTO" parameterType="java.lang.String">
+        select p.post_id, p.post_title, p.pcreated_date, p.like_count, i.image_savename
+        from post p
+        join image i on i.post_id=p.post_id
+        where p.user_email in #{user_email}
+    </select>
+
+    <!-- 내가 작성한 모든 댓글 정보 가져오기 -->
+    <select id="getMyComment" resultType="com.project.moapicture.dto.CommentsDTO" parameterType="java.lang.String">
+        select c.comment_id,c.comment_content,c.ccreated_date,p.post_title
+        from comments c
+        join post p on c.user_email=p.user_email
+        where c.user_email in #{user_email}
+    </select>
+
+    <!-- ~~~~~다른 계정 관리~~~~~ -->
+
+
+
+</mapper>

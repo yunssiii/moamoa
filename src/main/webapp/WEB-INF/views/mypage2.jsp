@@ -10,7 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- css -->
-    d>
+    <link rel="stylesheet" href="/resources/css/nav.css"/>
     <link rel="stylesheet" href="/resources/css/mypage.css"/>
     <title>마이페이지</title>
     <script>

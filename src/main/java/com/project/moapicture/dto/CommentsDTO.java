@@ -15,4 +15,6 @@ public class CommentsDTO {
     private int ref_no;
     private int ref_level;
 
+    //mypage select할 때 post와 jain해서 추가
+    private String post_title;
 }

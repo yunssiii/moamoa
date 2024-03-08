@@ -63,109 +63,24 @@
     <div class="account-wrap">
         <div class="a-up-box">
             <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Growing%20Heart.png" alt="Growing Heart" width="130" height="130" />
-            <div class="up-name">enzi_i</div>
-            <div class="up-email">dmswl@gmail.com</div>
+            <div class="up-name">${otherInfoDTO.user_nickname}</div>
+            <div class="up-email">${otherInfoDTO.user_email}</div>
         </div>
         <hr/>
         <div class="a-down-box">
-            <div class="grid">
-                <div class="grid-item">
-                    <img src="/images/logPicture1.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
+            <c:if test="${empty otherPostList}">
+                <div class="noPost">작성한 게시글이 없습니다.</div>
+            </c:if>
+            <c:if test="${!empty otherPostList}">
+                <div class="grid">
+                    <c:forEach var="otherPosts" items="${otherPostList}">
+                        <div class="grid-item">
+                            <img src="/images/${otherPosts.image_savename}"/>
+                            <p class="hover-text">${otherPosts.post_title}</p>
+                        </div>
+                    </c:forEach>
                 </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture2.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <!-- <div class="grid-item">
-                    <img src="/images/logPicture3.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture4.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture5.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture6.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture7.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture8.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture9.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture10.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture11.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture12.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture13.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture14.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture15.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture16.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture17.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture18.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture19.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture20.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture21.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture22.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture23.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture24.jpeg"/>
-                    <p class="hover-text">라디오 이미지</p>
-                </div> -->
-            </div>
+            </c:if>
         </div>
     </div>
     

@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%
+    request.setCharacterEncoding("UTF-8");
+    String cp = request.getContextPath();
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- css -->
-    <link rel="stylesheet" href="../css/nav.css"/>
-    <link rel="stylesheet" href="../css/mypage.css"/>
+    <link rel="stylesheet" href="/resources/css/nav.css"/>
+    <link rel="stylesheet" href="/resources/css/mypage.css"/>
     <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <!-- jquery -->
@@ -46,8 +51,8 @@
     <div class="mypage-wrap">
         <div class="a-up-box">
             <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Growing%20Heart.png" alt="Growing Heart" width="130" height="130" />
-            <div class="up-name">yunssiii</div>
-            <div class="up-email">hchdbsgk@naver.com</div>
+            <div class="up-name">${userInfoDTO.user_nickname}</div>
+            <div class="up-email">${userInfoDTO.user_email}</div>
             <div>
                 <button type="button" id="myInfoBtn" class="my-btns click">내 정보</button>
                 <button type="button" id="saveBtn" class="my-btns">저장</button>
@@ -97,35 +102,18 @@
         <!-- 저장 -->
         <div id="saveBox" class="hidden" style="width: 90%;">
             <div class="grid">
-                <div class="grid-sizer"></div> 
-                <div class="grid-item">
-                    <img src="/images/logPicture1.jpeg"/>
-                    <p class="hover-text">저장 탭</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture2.jpeg"/>
-                    <p class="hover-text">저장 탭</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture3.jpeg"/>
-                    <p class="hover-text">저장 탭</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture4.jpeg"/>
-                    <p class="hover-text">저장 탭</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture5.jpeg"/>
-                    <p class="hover-text">저장 탭</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture6.jpeg"/>
-                    <p class="hover-text">저장 탭</p>
-                </div>
-                <div class="grid-item">
-                    <img src="/images/logPicture7.jpeg"/>
-                    <p class="hover-text">저장 탭</p>
-                </div>
+                <div class="grid-sizer"></div>
+                <c:if test="${empty likedPostList}">
+                    저장한 게시글이 없습니다.
+                </c:if>
+                <c:if test="${!empty likedPostList}">
+                    <c:forEach var="likedPosts" items="${likedPostList}">
+                        <div class="grid-item">
+                            <img src="/images/${likedPosts.image_savename}"/>
+                            <p class="hover-text">${likedPosts.post_title}</p>
+                        </div>
+                    </c:forEach>
+                </c:if>
             </div>
         </div>
 
@@ -152,33 +140,24 @@
                 </tbody> -->
                 <tbody>
                     <!-- 반복 -->
-                    <tr>
-                        <td class="td-post">
-                            <input type="checkbox" id="post-chk1" name="post-chk" value="1"/>
-                            <label for="post-chk1"></label>
-                            <div>눈이 펑펑 오는 날</div>
-                        </td>
-                        <td class="td-center">2023.01.09</td>
-                        <td class="td-center">1</td>
-                    </tr>
-                    <tr>
-                        <td class="td-post">
-                            <input type="checkbox" id="post-chk2" name="post-chk" value="2"/>
-                            <label for="post-chk2"></label>
-                            <div>눈이 펑펑 오는 날</div>
-                        </td>
-                        <td class="td-center">2023.01.09</td>
-                        <td class="td-center">1</td>
-                    </tr>
-                    <tr>
-                        <td class="td-post">
-                            <input type="checkbox" id="post-chk3" name="post-chk" value="3"/>
-                            <label for="post-chk3"></label>
-                            <div>눈이 펑펑 오는 날</div>
-                        </td>
-                        <td class="td-center">2024.01.09</td>
-                        <td class="td-center">1</td>
-                    </tr>
+                    <c:if test="${empty myPostList}">
+                        <tr>
+                            <td colspan="3" class="td-none">등록된 게시글이 없습니다.</td>
+                        </tr>
+                    </c:if>
+                    <c:if test="${!empty myPostList}">
+                        <c:forEach var="myPosts" items="${myPostList}">
+                            <tr>
+                                <td class="td-post">
+                                    <input type="checkbox" id="post-chk1" name="post-chk" value="${myPosts.post_id}"/>
+                                    <label for="post-chk1"></label>
+                                    <div>${myPosts.post_title}</div>
+                                </td>
+                                <td class="td-center">${myPosts.pcreated_date}</td>
+                                <td class="td-center">${myPosts.like_count}</td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
                 </tbody>
                 <!-- 페이징 -->
                 <tfoot>
@@ -210,54 +189,31 @@
                 </thead>
                 <tbody>
                     <!-- 반복 -->
-                    <tr>
-                        <td class="comment-td">
-                            <div>
-                                <input type="checkbox" id="comment-chk1" name="comment-chk" value="1"/>
-                                <label for="comment-chk1"></label>
-                            </div>
-                            <a href="#" class="comment-href">
-                                <div>와 진짜 눈 왕많이 왔자나!!!!!</div>
-                                <div class="comment-date">2024.01.09</div>
-                                <div class="comment-title">
-                                    눈이 펑펑 오는 날
-                                    <span>[1]</span>
-                                </div>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="comment-td">
-                            <div>
-                                <input type="checkbox" id="comment-chk2" name="comment-chk" value="2"/>
-                                <label for="comment-chk2"></label>
-                            </div>
-                            <a href="#" class="comment-href">
-                                <div>와 진짜 눈 왕많이 왔자나!!!!!</div>
-                                <div class="comment-date">2024.01.09</div>
-                                <div class="comment-title">
-                                    눈이 펑펑 오는 날
-                                    <span>[1]</span>
-                                </div>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="comment-td">
-                            <div>
-                                <input type="checkbox" id="comment-chk3" name="comment-chk" value="3"/>
-                                <label for="comment-chk3"></label>
-                            </div>
-                            <a href="#" class="comment-href">
-                                <div>와 진짜 눈 왕많이 왔자나!!!!!</div>
-                                <div class="comment-date">2024.01.09</div>
-                                <div class="comment-title">
-                                    눈이 펑펑 오는 날
-                                    <span>[1]</span>
-                                </div>
-                            </a>
-                        </td>
-                    </tr>
+                    <c:if test="${empty myCommentList}">
+                        <tr>
+                            <td colspan="3" class="td-none">등록된 댓글이 없습니다.</td>
+                        </tr>
+                    </c:if>
+                    <c:if test="${!empty myCommentList}">
+                        <c:forEach var="myComments" items="${myCommentList}">
+                            <tr>
+                                <td class="comment-td">
+                                    <div>
+                                        <input type="checkbox" id="comment-chk1" name="comment-chk" value="${myComments.comment_id}"/>
+                                        <label for="comment-chk1"></label>
+                                    </div>
+                                    <a href="#" class="comment-href">
+                                        <div>${myComments.comment_content}</div>
+                                        <div class="comment-date">${myComments.ccreated_date}</div>
+                                        <div class="comment-title">
+                                            ${myComments.post_title}
+                                            <!-- <span>[1]</span> -->
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
                 </tbody>
                 <tfoot>
                     <tr style="border: none;">
