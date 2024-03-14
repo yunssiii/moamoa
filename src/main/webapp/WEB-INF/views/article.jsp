@@ -9,6 +9,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- css -->
     <link rel="stylesheet" href="resources/css/nav.css"/>
     <link rel="stylesheet" href="resources/css/article.css"/>
@@ -22,12 +23,24 @@
           'wght' 400,
           'GRAD' 0,
           'opsz' 24;
-          font-size: 25pt;
+          font-size: 20pt;
         }
 
         .material-symbols-outlined:hover{
             cursor: pointer;
         }
+
+         /* nav의 search 아이콘 */
+         .material-symbols-rounded {
+             font-variation-settings:
+             'FILL' 0,
+             'wght' 400,
+             'GRAD' 0,
+             'opsz' 24;
+             font-size: 17pt;
+             color: gray;
+             margin-left: 10px;
+         }
 
         .saveclicked {
             font-variation-settings:
@@ -35,19 +48,20 @@
             'wght' 400,
             'GRAD' 0,
             'opsz' 24;
-            font-size: 25pt;
+            font-size: 20pt;
         }
     </style>
+
 </head>
 <body>
 
     <nav class="navigator">
-        <div class="nav-logo">Log Picture</div>
+        <div class="nav-logo">Moa Moa</div>
         <div class="search-box">
-            <span class="material-symbols-outlined">
+            <span class="material-symbols-rounded">
                 search
             </span>
-            <input type="text" class="nav-search-input" placeholder="원하는 태그를 입력해보세요."/>
+            <input type="text" class="nav-search-input" placeholder="검색"/>
         </div>
         <div>
             <a class="nav-btn" href="#">로그인</a>
@@ -70,25 +84,28 @@
     </nav>
 
     <div class="article-wrap flex">
-        <div class="article-image">
+        <div class="article-image-area">
             <img src="/images/${postDTO.image_savename}"/>
         </div>
-        <div class="article-content">
-            <div class="content-up-1 flex">
-                <div>
-                    <input type="button" value="${postDTO.user_nickname}" class="post-account-btn" onclick="location.href='profile/' + '${postDTO.user_nickname}'">
-                    <div style="font-size: 10pt;">${postDTO.pcreated_date}</div>
+        <div class="article-content-area">
+            <div class="content-up-area flex">
+                <div class="account-box1 flex">
+                    <img class="a-account_image" src="/images/${postDTO.image_savename}" onclick="location.href='profile/' + '${postDTO.user_nickname}'"/>
+                    <div style="margin-left: 10px;">
+                        <input type="button" value="${postDTO.user_nickname}" class="a-account-btn" onclick="location.href='profile/' + '${postDTO.user_nickname}'">
+                        <div style="font-size: 8pt;">${postDTO.pcreated_date}</div>
+                    </div>
                 </div>
-                <div class="content-up-2 flex">
+                <div class="account-box2 flex">
                     <c:if test="${email eq postDTO.user_email}">
-                        <input type="button" value="수정" class="post-update-btn" onclick="location.href='updated?id=' + '${postDTO.post_id}'">
-                        <input type="button" value="삭제" class="post-update-btn post-delete-btn" onclick="location.href='delete?id=' + '${postDTO.post_id}'">
+                        <input type="button" value="수정" class="a-update-btn" onclick="location.href='updated?id=' + '${postDTO.post_id}'">
+                        <input type="button" value="삭제" class="a-update-btn a-delete-btn" onclick="location.href='delete?id=' + '${postDTO.post_id}'">
                     </c:if>
                     <span class="material-symbols-outlined">
                         download
                     </span>
 
-                    <button class="content-save-btn" type="button" >
+                    <button class="a-save-btn" type="button" >
                             <!-- 로그인한 사용자가 좋아요를 한 게시글일 경우 -->
                             <c:if test="${isLike}">
                                 <span class="material-symbols-outlined saveclicked" id="saveBtn" onclick="saveBtnClicked(${postDTO.post_id})">
@@ -105,52 +122,66 @@
                 </div>
             </div>
 
-
-            <script type="text/javascript">
-
-            </script>
-
-            <div class="content-scroll-box">
-                <div class="content-middle">
-                    <div class="content-title">${postDTO.post_title}</div>
+            <div class="content-down-area">
+                <div class="content-box">
                     <div class="content-text">${postDTO.post_content}</div>
                     <div>
                         <c:forEach var="hashtags" items="${hashtagList}">
-                            <input class="content-tag" type="button" value="${hashtags.tag_name}" onclick="location.href='logpicture/' + '${hashtags.tag_name}'">
+                            <input class="content-tag" type="button" value="#${hashtags.tag_name}" onclick="location.href='logpicture/' + '${hashtags.tag_name}'">
                         </c:forEach>
                     </div>
                 </div>
-                <hr/>
-                <div class="content-down">
-                    <div class="flex" style="margin-bottom: 10px;align-items: center;">
-                        <div style="font-size: 15pt;">댓글</div>
-                        <div>&nbsp;&nbsp;1개</div>
-                    </div>
-                    <div class="flex">
-                        <div class="down-2">
-                            <div class="comment-name">enzi_i</div>
-                            <div class="comment-text">와 정말 멋져요!!</div>
-                            <div class="down-3 flex">
-                                <div class="comment-date">1일</div>
-                                <button class="comment-addBtn" type="button">답글 쓰기</button>
-                            </div>
-                        </div>
-                        <!-- 내 댓글일 때만 수정/삭제 visible -->
-                        <div class="down-4">
-                            <button class="comment-user-btn" type="button">수정</button>
-                            |
-                            <button class="comment-user-btn" type="button">삭제</button>
-                        </div>
-                    </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 댓글부분 -->
+    <div class="comment-area">
+        <div class="c-content-box flex" style="margin-bottom: 10px;align-items: center;">
+            <div class="flex" style="align-items: center">
+                <div style="font-size: 15pt;">댓글&nbsp;</div>
+                <div>1</div>
+            </div>
+        </div>
+
+        <div id="commentbox-div" class="comment-input-box flex">
+            <input type="text" id="c-input" class="comment-input" placeholder="댓글을 남겨보세요." onkeyup="activeCommentBtn()"/>
+            <%-- <input type="button" class="comment-input-btn" value="입력">--%>
+        </div>
+
+        <div class="flex" style="margin: 25px 5px;">
+            <div class="comment-content-box1">
+                <div class="c-content-name">enzi_i</div>
+                <div class="c-content-text">와 정말 멋져요!!</div>
+                <div class="comment-content-box2 flex">
+                    <div class="c-content-date">1일</div>
+                    <!-- addInputComment()에 해당 댓글 닉네임 매개변수로 넘기기 -->
+                    <button class="c-content-btn" type="button" onclick="clickReplyBtn()">답글 쓰기</button>
+                    <!-- 내 댓글일 때만 수정/삭제 visible -->
+                    <button class="c-content-btn" type="button">수정</button>
+                    <button class="c-content-btn" type="button">삭제</button>
                 </div>
             </div>
-            <!-- 클릭 시 흰색으로 바꾸기 - js -->
-            <div class="comment-box flex">
-                <input type="text" class="comment-input" placeholder="댓글을 남겨보세요."/>
-                <span class="material-symbols-outlined">
-                    send
-                </span>
+        </div>
+        <div class="ref flex" style="margin: 25px 5px 10px 50px;">
+            <div class="comment-content-box1">
+                <div class="c-content-name">enzi_i</div>
+                <div class="c-content-text">대댓임다</div>
+                <div class="comment-content-box2 flex">
+                    <div class="c-content-date">1일</div>
+                    <button class="c-content-btn" type="button">답글 쓰기</button>
+                    <!-- 내 댓글일 때만 수정/삭제 visible -->
+                    <button class="c-content-btn" type="button">수정</button>
+                    <button class="c-content-btn" type="button">삭제</button>
+                </div>
             </div>
+        </div>
+        <div id="reply-section" class="comment-input-box2 flex hidden">
+            <!-- value에 @ + 닉네임해주기 -->
+            <div contenteditable="true" type="text" id="reply-input" class="comment-input2">
+                <button type="button" contenteditable="false" style="color: blue; margin: 0px; padding: 0px; border: none; background: none; pointer-events: none;">@닉네임&nbsp;</button>
+            </div>
+            <input type="button" class="comment-input-btn2" value="입력" onclick="submitReply()">
         </div>
     </div>
     

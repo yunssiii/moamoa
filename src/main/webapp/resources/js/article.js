@@ -54,5 +54,70 @@ function saveBtnClicked(postId) {
     }
 }
 
+//댓글창 내용 입력 시에 [입력] 버튼 활성화
+
+let isButtonCreated = false;
+let inputButton;
+
+function activeCommentBtn(){
+    const commentDiv = document.getElementById("commentbox-div");
+    const commentValue = document.getElementById("c-input").value; // value()가 아닌 value로 변경
+
+    console.log(isButtonCreated);
+
+    if (commentValue.trim() !== "" && !isButtonCreated) { // commentValue가 비어 있지 않은지 확인
+        // commentValue가 있으면 commentDiv 아래에 <input type="button" class="comment-input-btn" value="입력"> 추가하기
+        inputButton = document.createElement("input");
+        inputButton.setAttribute("type", "button");
+        inputButton.setAttribute("class", "comment-input-btn");
+        inputButton.setAttribute("value", "입력");
+        commentDiv.appendChild(inputButton);
+
+        isButtonCreated = true; // 버튼이 생성되었음을 나타내는 변수를 true로 설정합니다.
+    }else if(commentValue == "" && isButtonCreated){
+        commentDiv.removeChild(inputButton);
+
+        isButtonCreated = false;
+    }
+}
+
+//대댓 input 추가
+//[답글 쓰기] 버튼 클릭 시 대댓 input 생성
+
+
+function clickReplyBtn() {
+    const replySection = document.getElementById("reply-section");
+    // const replyInput = document.getElementById("reply-input");
+    //const contentSpan = document.getElementById("span");
+
+    // const nickname = document.getElementById("nickname");
+    // const span = document.getElementById("span");
+    //
+    // const content = nickname.innerText.replace("", ""); // @닉네임 부분은 제외하고 가져오기
+    //
+    // // span 요소에 내용 설정
+    // span.innerText = content;
+
+
+    // 답글 input 태그에 @윤하 추가하기
+    // replyInput.value = "@enzi_i ";
+    //
+    // // @윤하 글자 파랑색으로 변경하기
+    // replyInput.style.color = "blue";
+    //
+    // const nicknameSpan = document.createElement("span"); //닉네임 담을 span
+    // // nicknameSpan.style.color = "blue" // 색 파랑으로
+    //
+    // const beforeSpan = replyInput.value; //매개변수로 넘어온 이름 "@" + 닉네임 + " "
+    // const afterSpan = replyText.substring(beforeSpan.length); // 닉네임 이후의 내용
+    // nicknameSpan.innerHTML = `${beforeSpan}<span style="color: black;">${afterSpan}</span>`;
+
+    // 답글 작성란 보이기
+    replySection.style.display = "flex";
+}
+
+
+
+
 
 
