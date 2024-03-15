@@ -1,9 +1,11 @@
 package com.project.moapicture.controller;
 
+import com.project.moapicture.dto.CommentsDTO;
 import com.project.moapicture.dto.HashtagDTO;
 import com.project.moapicture.dto.LikeDTO;
 import com.project.moapicture.dto.PostDTO;
 import com.project.moapicture.service.ArticleService;
+import com.project.moapicture.service.CommentService;
 import com.project.moapicture.service.CreatedService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -35,6 +37,9 @@ public class BoardController {
 
     @Autowired
     private ArticleService articleService;
+
+    @Autowired
+    private CommentService commentService;
 
     @Autowired
     private ResourceLoader resourceLoader;
@@ -215,6 +220,9 @@ public class BoardController {
             return mav;
         }
 
+        //댓글 전체 조회
+        List<CommentsDTO> commentsDTOList = commentService.getRefStepList(intPostId);
+
         //해시태그는 여러 개일 수도 있으니 list에 담기
         List<HashtagDTO> hashtagList = articleService.getHashtag(intPostId);
 
@@ -222,6 +230,7 @@ public class BoardController {
         mav.addObject("hashtagList",hashtagList);
         mav.addObject("email",email);
         mav.addObject("isLike",isLike);
+        mav.addObject("commentList",commentsDTOList);
 
         mav.setViewName("article");
 

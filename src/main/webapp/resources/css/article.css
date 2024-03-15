@@ -236,6 +236,16 @@ wrap - area - box - div
     margin: 10px;
 }
 
+.replyNickname{
+    color: rgb(85, 187, 247);
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    background: none;
+    pointer-events: none;
+    font-family: 'NanumSquareBold';
+}
+
 .comment-input2::placeholder {
     color: #dadada;
 }

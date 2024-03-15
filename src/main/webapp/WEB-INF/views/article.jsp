@@ -144,44 +144,60 @@
             </div>
         </div>
 
+        <!-- 본댓글입력 부분 -->
         <div id="commentbox-div" class="comment-input-box flex">
             <input type="text" id="c-input" class="comment-input" placeholder="댓글을 남겨보세요." onkeyup="activeCommentBtn()"/>
-            <%-- <input type="button" class="comment-input-btn" value="입력">--%>
+            <input type="button" id="submit-comment" class="comment-input-btn hidden" value="입력" onclick="submitComment(${postDTO.post_id})"/>
         </div>
 
-        <div class="flex" style="margin: 25px 5px;">
-            <div class="comment-content-box1">
-                <div class="c-content-name">enzi_i</div>
-                <div class="c-content-text">와 정말 멋져요!!</div>
-                <div class="comment-content-box2 flex">
-                    <div class="c-content-date">1일</div>
-                    <!-- addInputComment()에 해당 댓글 닉네임 매개변수로 넘기기 -->
-                    <button class="c-content-btn" type="button" onclick="clickReplyBtn()">답글 쓰기</button>
-                    <!-- 내 댓글일 때만 수정/삭제 visible -->
-                    <button class="c-content-btn" type="button">수정</button>
-                    <button class="c-content-btn" type="button">삭제</button>
-                </div>
-            </div>
+        <!-- 댓글 조회 부분 -->
+        <div style="height: 300px;overflow: auto">
+            <c:forEach var="commentlist" items="${commentList}">
+                <!-- 본댓글 조회 -->
+                <c:if test="${commentlist.ref_step == 0}">
+                    <div class="flex" style="margin: 25px 5px;">
+                        <div class="comment-content-box1">
+                            <div class="c-content-name">${commentlist.user_nickname}</div>
+                            <div class="c-content-text">${commentlist.comment_content}</div>
+                            <div class="comment-content-box2 flex">
+                                <div class="c-content-date">${commentlist.ccreated_date}</div>
+                                <!-- addInputComment()에 해당 댓글 닉네임 매개변수로 넘기기 -->
+                                <button class="c-content-btn" name="reply" type="button" >답글 쓰기</button>
+                                <!-- 내 댓글일 때만 수정/삭제 visible -->
+                                <button class="c-content-btn" type="button">수정</button>
+                                <button class="c-content-btn" type="button">삭제</button>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
+
+                <!-- 대댓글 조회 -->
+                <c:if test="${commentlist.ref_step > 0}">
+                    <%--        <div class="ref flex" style="margin: 25px 5px 10px 50px;">--%>
+                    <%--            <div class="comment-content-box1">--%>
+                    <%--                <div class="c-content-name">enzi_i</div>--%>
+                    <%--                <div class="c-content-text">대댓임다</div>--%>
+                    <%--                <div class="comment-content-box2 flex">--%>
+                    <%--                    <div class="c-content-date">1일</div>--%>
+                    <%--                    <button class="c-content-btn" name="reply" type="button">답글 쓰기</button>--%>
+                    <%--                    <!-- 내 댓글일 때만 수정/삭제 visible -->--%>
+                    <%--                    <button class="c-content-btn" type="button">수정</button>--%>
+                    <%--                    <button class="c-content-btn" type="button">삭제</button>--%>
+                    <%--                </div>--%>
+                    <%--            </div>--%>
+                    <%--        </div>--%>
+                </c:if>
+            </c:forEach>
         </div>
-        <div class="ref flex" style="margin: 25px 5px 10px 50px;">
-            <div class="comment-content-box1">
-                <div class="c-content-name">enzi_i</div>
-                <div class="c-content-text">대댓임다</div>
-                <div class="comment-content-box2 flex">
-                    <div class="c-content-date">1일</div>
-                    <button class="c-content-btn" type="button">답글 쓰기</button>
-                    <!-- 내 댓글일 때만 수정/삭제 visible -->
-                    <button class="c-content-btn" type="button">수정</button>
-                    <button class="c-content-btn" type="button">삭제</button>
-                </div>
-            </div>
-        </div>
+
+
+        <!-- 대댓글입력 부분 -->
         <div id="reply-section" class="comment-input-box2 flex hidden">
             <!-- value에 @ + 닉네임해주기 -->
             <div contenteditable="true" type="text" id="reply-input" class="comment-input2">
-                <button type="button" contenteditable="false" style="color: blue; margin: 0px; padding: 0px; border: none; background: none; pointer-events: none;">@닉네임&nbsp;</button>
+                <button type="button" class="replyNickname" contenteditable="false">@닉네임&nbsp;</button>
             </div>
-            <input type="button" class="comment-input-btn2" value="입력" onclick="submitReply()">
+            <input type="button" class="comment-input-btn2" value="입력" onclick="submitReply(${postDTO.post_id})">
         </div>
     </div>
     

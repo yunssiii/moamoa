@@ -13,8 +13,11 @@ public class CommentsDTO {
     private String ccreated_date;
     private String cupdated_date;
     private int ref_no;
-    private int ref_level;
+    private int ref_step;
 
     //mypage select할 때 post와 jain해서 추가
     private String post_title;
+
+    //본댓 대댓 구분
+    private String commentYN;
 }
