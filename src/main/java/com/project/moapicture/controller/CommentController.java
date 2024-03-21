@@ -33,7 +33,7 @@ public class CommentController {
         String email = "hchdbsgk@naver.com"; //일단 하드코딩
 
         int postId = commentsDTO.getPost_id();
-        String commentYN = commentsDTO.getCommentYN();
+        String commentYN = commentsDTO.getC_deleteyn();
         String commentContent = commentsDTO.getComment_content();
         String userNickname = createdService.selectNickname(email);
         int commentId = commentService.commentMaxNum()+1;

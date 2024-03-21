@@ -71,16 +71,72 @@ function activeCommentBtn(){
 //[답글 쓰기] 버튼 클릭 시 대댓 input 생성
 //닉네임..받아서 뿌려줘야하는데..
 
-var replySection = document.getElementsByName("reply");
+// var replySection = document.getElementsByName("reply");
+//
+// replySection.forEach(e => {
+//     e.addEventListener('click', ()=>{
+//         const replySection = document.getElementById("reply-section");
+//
+//         // 답글 작성란 보이기
+//         replySection.style.display = "flex";
+//     });
+// });
 
-replySection.forEach(e => {
-    e.addEventListener('click', ()=>{
-        const replySection = document.getElementById("reply-section");
+// 대댓창 보이기
+function removeReplySection() {
+    const replySectionId = document.getElementById("reply-section");
+    if (replySectionId) {
+        replySectionId.parentNode.removeChild(replySectionId);
+    }
+}
 
-        // 답글 작성란 보이기
-        replySection.style.display = "flex";
-    });
-});
+function replyInput(nickname, refStep, commentId, postId){
+
+    const replySectionId = document.getElementById("reply-section");
+    let commnetId = document.getElementById("commnet"+commentId);
+    let replyId = document.getElementById("reply"+commentId);
+
+    if (replySectionId && refStep==0){
+        commnetId.removeChild(replySectionId);
+    }else if (replySectionId && refStep==1){
+        replyId.removeChild(replySectionId);
+    }
+
+    // reply-section 요소 생성
+    const replySection = document.createElement("div");
+    replySection.setAttribute("id", "reply-section");
+    replySection.classList.add("comment-input-box2", "flex");
+
+    //내부 html 요소 생성
+    replySection.innerHTML = `
+        <div contenteditable="true" type="text" id="reply-input" class="comment-input2">
+            <button type="button" class="replyNickname" contenteditable="false">@` + nickname + `&nbsp;</button>
+        </div>
+    <input type="button" class="comment-input-btn2" value="입력" onclick="submitReply(`+ postId +`)">
+    `;
+
+    //본댓글일 때
+    if (!replySectionId && refStep==0){
+        // 문서에 생성된 요소를 추가
+
+        commnetId.appendChild(replySection);
+    }else if(!replySectionId && refStep==1){
+
+        replyId.appendChild(replySection);
+    }
+
+}
+
+
+
+// function replyInput(nickname, refNo){
+//     const replySection = document.getElementById("reply-section");
+//
+//
+//
+//     // 답글 작성란 보이기
+//     replySection.style.display = "flex";
+// }
 
 // 본댓글 insert
 function submitComment(postId){

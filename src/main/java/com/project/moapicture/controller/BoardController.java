@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -220,8 +221,14 @@ public class BoardController {
             return mav;
         }
 
-        //댓글 전체 조회
-        List<CommentsDTO> commentsDTOList = commentService.getRefStepList(intPostId);
+        // 본댓글 조회
+        List<CommentsDTO> commentsDTOList = commentService.getCommentList(intPostId,0);
+
+        // 대댓글 조회
+        List<CommentsDTO> replyDTOList = commentService.getCommentList(intPostId,1);
+
+        System.out.println("본댓글 순서보자 >>>"+commentsDTOList);
+        System.out.println("대댓글 순서보자 >>>"+replyDTOList);
 
         //해시태그는 여러 개일 수도 있으니 list에 담기
         List<HashtagDTO> hashtagList = articleService.getHashtag(intPostId);
@@ -231,6 +238,7 @@ public class BoardController {
         mav.addObject("email",email);
         mav.addObject("isLike",isLike);
         mav.addObject("commentList",commentsDTOList);
+        mav.addObject("replyList",replyDTOList);
 
         mav.setViewName("article");
 

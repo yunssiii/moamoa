@@ -19,5 +19,5 @@ public class CommentsDTO {
     private String post_title;
 
     //본댓 대댓 구분
-    private String commentYN;
+    private String c_deleteyn;
 }

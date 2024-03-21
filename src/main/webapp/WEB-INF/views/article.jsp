@@ -155,50 +155,59 @@
             <c:forEach var="commentlist" items="${commentList}">
                 <!-- 본댓글 조회 -->
                 <c:if test="${commentlist.ref_step == 0}">
-                    <div class="flex" style="margin: 25px 5px;">
-                        <div class="comment-content-box1">
-                            <div class="c-content-name">${commentlist.user_nickname}</div>
-                            <div class="c-content-text">${commentlist.comment_content}</div>
-                            <div class="comment-content-box2 flex">
-                                <div class="c-content-date">${commentlist.ccreated_date}</div>
-                                <!-- addInputComment()에 해당 댓글 닉네임 매개변수로 넘기기 -->
-                                <button class="c-content-btn" name="reply" type="button" >답글 쓰기</button>
-                                <!-- 내 댓글일 때만 수정/삭제 visible -->
-                                <button class="c-content-btn" type="button">수정</button>
-                                <button class="c-content-btn" type="button">삭제</button>
+                    <div id="commnet${commentlist.comment_id}">
+                        <div  class="flex" style="margin: 25px 5px;">
+                            <div class="comment-content-box1">
+                                <div class="c-content-name">${commentlist.user_nickname}랑 ${commentlist.ref_no}</div>
+                                <div class="c-content-text">${commentlist.comment_content}</div>
+                                <div class="comment-content-box2 flex">
+                                    <div class="c-content-date">${commentlist.ccreated_date}</div>
+                                    <!-- addInputComment()에 해당 댓글 닉네임 매개변수로 넘기기 -->
+                                    <button class="c-content-btn" name="reply" type="button" onclick="replyInput('${commentlist.user_nickname}', ${commentlist.ref_step}, ${commentlist.comment_id}, ${commentlist.post_id})">답글 쓰기</button>
+                                    <!-- 내 댓글일 때만 수정/삭제 visible -->
+                                    <button class="c-content-btn" type="button">수정</button>
+                                    <button class="c-content-btn" type="button">삭제</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </c:if>
 
                 <!-- 대댓글 조회 -->
-                <c:if test="${commentlist.ref_step > 0}">
-                    <%--        <div class="ref flex" style="margin: 25px 5px 10px 50px;">--%>
-                    <%--            <div class="comment-content-box1">--%>
-                    <%--                <div class="c-content-name">enzi_i</div>--%>
-                    <%--                <div class="c-content-text">대댓임다</div>--%>
-                    <%--                <div class="comment-content-box2 flex">--%>
-                    <%--                    <div class="c-content-date">1일</div>--%>
-                    <%--                    <button class="c-content-btn" name="reply" type="button">답글 쓰기</button>--%>
-                    <%--                    <!-- 내 댓글일 때만 수정/삭제 visible -->--%>
-                    <%--                    <button class="c-content-btn" type="button">수정</button>--%>
-                    <%--                    <button class="c-content-btn" type="button">삭제</button>--%>
-                    <%--                </div>--%>
-                    <%--            </div>--%>
-                    <%--        </div>--%>
-                </c:if>
+                <!-- commentlist.ref_step > 0 -->
+                <c:forEach var="replylist" items="${replyList}">
+                    <c:if test="${commentlist.ref_no eq replylist.ref_no}">
+                        <div id="reply${replylist.comment_id}">
+                            <div class="ref flex" style="margin: 25px 5px 10px 50px;">
+                                <div class="comment-content-box1">
+                                    <div class="c-content-name">${replylist.user_nickname}랑 ${replylist.ref_no}</div>
+                                    <div class="c-content-text">${replylist.comment_content}</div>
+                                    <div class="comment-content-box2 flex">
+                                        <div class="c-content-date">${replylist.ccreated_date}</div>
+                                        <button class="c-content-btn" name="reply" type="button" onclick="replyInput('${replylist.user_nickname}', ${replylist.ref_step}, ${replylist.comment_id}, ${replylist.post_id})">답글 쓰기</button>
+                                        <!-- 내 댓글일 때만 수정/삭제 visible -->
+                                        <button class="c-content-btn" type="button">수정</button>
+                                        <button class="c-content-btn" type="button">삭제</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </c:if>
+                </c:forEach>
             </c:forEach>
         </div>
 
 
         <!-- 대댓글입력 부분 -->
-        <div id="reply-section" class="comment-input-box2 flex hidden">
-            <!-- value에 @ + 닉네임해주기 -->
-            <div contenteditable="true" type="text" id="reply-input" class="comment-input2">
-                <button type="button" class="replyNickname" contenteditable="false">@닉네임&nbsp;</button>
-            </div>
-            <input type="button" class="comment-input-btn2" value="입력" onclick="submitReply(${postDTO.post_id})">
-        </div>
+<%--        <div id="reply-section" class="comment-input-box2 flex hidden">--%>
+<%--            <!-- value에 @ + 닉네임해주기 -->--%>
+<%--            <div contenteditable="true" type="text" id="reply-input" class="comment-input2">--%>
+<%--                <button type="button" class="replyNickname" contenteditable="false">@닉네임&nbsp;</button>--%>
+<%--            </div>--%>
+<%--            <input type="button" class="comment-input-btn2" value="입력" onclick="submitReply(${postDTO.post_id})">--%>
+<%--        </div>--%>
     </div>
     
 

@@ -31,6 +31,6 @@
      <!-- 본 댓글 조회 -->
         <select id="getCommentList" resultType="com.project.moapicture.dto.CommentsDTO" parameterType="com.project.moapicture.dto.CommentsDTO">
             select comment_id,comment_content,user_nickname,to_char(ccreated_date, 'yyyy.mm.dd') ccreated_date,cupdated_date,ref_no,ref_step,post_id,user_email,c_deleteyn from comments
-            where post_id=#{post_id} and ref_step=#{ref_step} order by ref_no desc
+            where post_id=#{post_id} and ref_step=#{ref_step} order by comment_id desc
         </select>
 </mapper>
